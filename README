@@ -1,0 +1,12 @@
+for the most of these scripts, Vim 6.x required.
+to install, link `vimrc' file to `.vimrc' in your home directory:
+
+    % ln vimrc ~/.vimrc
+    % ln gvimrc ~/.gvimrc
+    % ln viewrc ~/.viewrc
+
+install `vless' somewhere within your $PATH or create shell alias like this:    
+
+    % alias vs=~/.vim/vless
+
+Last updated $Date: 2006/10/28 09:51:05 $
