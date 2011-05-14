@@ -1,0 +1,90 @@
+#!/usr/bin/gawk -f
+#
+# lookup for keyword in boost library
+# prints URL corresponding to keyword supplied on command line
+# if keyword is unknown prints "NOT FOUND" and exits with non-zero exit status
+#
+BEGIN {
+    if (ARGC != 2) {
+	print "usage: boost-lookup keyword"
+	exit 1
+    }
+    if (! ("BOOST" in ENVIRON)) {
+	ENVIRON["BOOST"] = "C:/usr/boost_1_46_1"
+    }
+    boost_libs = "file://"ENVIRON["BOOST"]"/libs/"
+
+    REF["any"] = "any/index.html"
+    REF["array"] = "array/array.html"
+    REF["bind"] = "bind/bind.html"
+    REF["ref"] = "bind/ref.html"
+    REF["cref"] = "bind/ref.html"
+    REF["compatibility"] = "compatibility/index.html"
+    REF["compose"] = "compose/index.html"
+    REF["concept_check"] = "concept_check/index.html"
+    REF["config"] = "config/index.html"
+    REF["conversion"] = "conversion/index.html"
+    REF["crc"] = "crc/index.html"
+    REF["date_time"] = "date_time/index.html"
+    REF["disjoint_sets"] = "disjoint_sets/index.html"
+    REF["dynamic_bitset"] = "dynamic_bitset/index.html"
+    REF["format"] = "format/index.html"
+    REF["function"] = "function/index.html"
+    REF["functional"] = "functional/index.html"
+    REF["graph"] = "graph/index.html"
+    REF["integer"] = "integer/index.htm"
+    REF["cstdint"] = "integer/cstdint.htm"
+    REF["io"] = "io/index.html"
+    REF["lambda"] = "lambda/index.html"
+    REF["math"] = "math/index.html"
+    REF["mem_fn"] = "mem_fn/index.html"
+    REF["min_rand"] = "min_rand/index.html"
+    REF["mpl"] = "mpl/index.html"
+    REF["multi_array"] = "multi_array/index.html"
+    REF["numeric"] = "numeric/index.html"
+    REF["pool"] = "pool/index.html"
+    REF["preprocessor"] = "preprocessor/index.html"
+    REF["property_map"] = "property_map/index.html"
+    REF["python"] = "python/index.html"
+    REF["random"] = "random/index.html"
+    REF["rational"] = "rational/index.html"
+    REF["regex"] = "regex/index.html"
+    REF["signals"] = "signals/index.html"
+    REF["smart_ptr"] = "smart_ptr/smart_ptr.htm"
+    REF["scoped_ptr"] = "smart_ptr/scoped_ptr.htm"
+    REF["shared_ptr"] = "smart_ptr/shared_ptr.htm"
+    REF["weak_ptr"] = "smart_ptr/weak_ptr.htm"
+    REF["scoped_array"] = "smart_ptr/scoped_array.htm"
+    REF["shared_array"] = "smart_ptr/shared_array.htm"
+    REF["static_assert"] = "static_assert/index.html"
+    REF["test"] = "test/index.html"
+    REF["thread"] = "thread/index.html"
+    REF["timer"] = "timer/index.html"
+    REF["tokenizer"] = "tokenizer/index.html"
+    REF["tuple"] = "tuple/index.html"
+    REF["type_traits"] = "type_traits/index.html"
+    REF["is_const"] = "type_traits/index.htm#properties"
+    REF["utility"] = "utility/utility.htm"
+    REF["next"] = "utility/utility.htm#functions_next"
+    REF["prior"] = REF["next"]
+    REF["tie"] = "tuple/doc/tuple_users_guide.html#tiers"
+    REF["noncopyable"] = "utility/utility.htm#Class_noncopyable"
+    REF["operators"] = "utitity/operators.htm"
+    REF["addable"] = REF["operators"]
+    REF["subtractable"] = REF["operators"]
+    REF["dividable2"] = REF["operators"]
+    REF["multipliable2"] = REF["operators"]
+
+    if (ARGV[1] in REF) {
+	uri = REF[ARGV[1]]
+    }
+    else if (ARGV[1] ~ /^u?int((_least|_fast)?(8|16|32|64)|max)_t$/) {
+	uri = REF["cstdint"]
+    }
+    else {
+	print "NOT FOUND" > "/dev/stderr"
+	exit 1
+    }
+    print boost_libs uri
+    exit 0
+}
