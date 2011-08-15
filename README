@@ -1,4 +1,13 @@
 for the most of these scripts, Vim 6.x required.
+
+syntax files that modify existing settings should go into:
+
+    after/syntax/
+
+new syntax files should be placed into:
+
+    syntax/
+
 to install, link `vimrc' file to `.vimrc' in your home directory:
 
     % ln vimrc ~/.vimrc

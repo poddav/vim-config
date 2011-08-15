@@ -1,0 +1,64 @@
+" .viewrc -- settings for VIM invoked in read-only mode
+" $Id: viewrc,v 1.5 2006/10/28 10:32:54 rnd Exp $
+
+" source system-wide init script, if it exists
+if filereadable($VIM.'/vimrc') | so $VIM/vimrc | endif
+
+if $USER == "root"
+    let $VIMHOME="~rnd/.vim"
+elseif has("dos16") || has("dos32")
+    let $VIMHOME="C:/WINDOWS/PROFILES/RND/VIM"
+elseif $OS == "Windows_NT"
+    let $VIMHOME="~/.vim"
+    let $PATH='C:/Cygwin/bin;'.$PATH
+else
+    let $VIMHOME="~/.vim"
+endif
+
+if version >= 600 && stridx(&runtimepath, expand($VIMHOME)) == -1
+    set runtimepath^=$VIMHOME
+endif
+
+so $VIMHOME/terminal.vim
+
+if &term == "xterm"
+    set t_ti=7[r[?47h[?25l t_te=[?47l8
+endif
+
+au BufRead *	setlocal nomodifiable
+
+set nocp
+set hlsearch
+set viminfo='20,h
+set ignorecase
+set incsearch
+set laststatus=1
+set listchars+=precedes:<,extends:>
+set ruler rulerformat=%40(%=%f\ \ %l/%L%5P%)
+set scroll=1
+set scrolloff=999
+set shortmess=filmnrxt
+set showbreak=
+set smartcase
+set nostartofline
+set nowrap
+
+if !exists("syntax_on")
+    let mysyntaxfile=$VIMHOME."/syntax.vim"
+    syntax on
+endif
+
+nmap <Down> 1<C-D>
+nmap <Up> 1<C-U>
+nmap <Left> 4zh
+nmap <Right> 4zl
+nmap <Home> 1G
+nmap <End> G
+nmap <BS> <C-B>
+nmap <Space> <C-F>
+nmap <F2> :set invwrap<CR>
+nmap <F7> /\V
+nmap <Esc>u :nohl<CR>
+nmap q :q<CR>
+
+" vim: ft=vim

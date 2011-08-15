@@ -1,0 +1,12 @@
+// -*- C++ -*-
+//! \file       *+filename+*
+//! \date       *+date+*
+//! \brief      *+cursor+*
+//
+
+#ifndef *+headmacro+*
+#define *+headmacro+*
+
+
+
+#endif /* *+headmacro+* */

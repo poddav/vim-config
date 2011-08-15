@@ -1,0 +1,24 @@
+# *+basename+* module
+# $Id$
+
+package *+basename+*;
+
+$*+basename+*::VERSION = substr (q$Revision: 0.1 $, 10) +0;
+
+*+cursor+*
+
+sub new {
+    my $proto = shift;
+    my $class = ref($proto) || $proto;
+    my $self  = {};
+
+    bless ($self, $class);
+    $self->_init (@_);
+    return $self;
+}
+
+sub _init {
+}
+
+1;
+__END__

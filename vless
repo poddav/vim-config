@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# View files/stdin with Vim.
+#
+# $Id: vless,v 1.1 2006/10/28 09:38:03 rnd Exp $
+
+if [ "$#" -eq 0 ]; then
+    if tty -s; then
+	echo filename not specified >&2
+	exit 1
+    else
+	exec /usr/bin/view -n -u ~/.viewrc -
+    fi
+else
+    exec /usr/bin/view -n -u ~/.viewrc "$@"
+fi

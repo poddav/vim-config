@@ -69,6 +69,7 @@ augroup skeleton "{{{2
 	\				|   call ReadSkel('h')
 	\				| endif
     au BufNewFile *.c		silent call ReadSkel('c')
+    au BufNewFile *.cs		silent call ReadSkel('cs')
     au BufNewFile *.hh,*.hpp	silent call ReadSkel('hh')
     au BufNewFile *.cc,*.cpp,*.cxx,*.tcc	silent call ReadSkel('cc')
     au BufNewFile *.y,*.yy		silent call ReadSkel('yacc')

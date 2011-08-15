@@ -1,0 +1,41 @@
+Name:		*+basename+*
+Version:	*+cursor+*
+Release:	1
+Summary:	
+Group:		Applications
+Copyright:	GPL
+Source:		%{name}-%{version}.tar.gz
+Packager:	*+author+*
+URL:		
+Buildroot:	%{_tmppath}/%{name}-buildroot
+
+%description
+
+# --------------------------------------------------------------------
+%prep
+%setup -q
+
+# --------------------------------------------------------------------
+%build
+#CFLAGS="$RPM_OPT_FLAGS" ./configure
+%configure
+make
+
+# --------------------------------------------------------------------
+%install
+[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
+
+# --------------------------------------------------------------------
+%clean
+rm -rf %{buildroot}
+
+# --------------------------------------------------------------------
+%files
+%defattr(-,root,root)
+
+# --------------------------------------------------------------------
+%changelog
+
+* *+shortdate+* *+author+*
+- Created spec file.

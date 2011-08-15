@@ -1,0 +1,21 @@
+" Vim syntax file
+" Language:	*+cursor+*
+" Maintainer:	*+author+*
+" Created:	*+shortdate+*
+" Last Change:	*+date+*
+" Filenames:	
+" $Id$
+
+syn clear
+syn case match
+
+syn match *+basename+*Comment	/^#.*/
+
+if !exists("did_*+basename+*_syntax_inits")
+    let did_*+basename+*_syntax_inits = 1
+    hi link *+basename+*Comment	Comment
+endif
+
+let b:current_syntax = "*+basename+*"
+
+" vim: ts=16
