@@ -1,11 +1,12 @@
 " C# syntax tweaks
-" Last Change:	2011 Aug 05
+" Last Change:	2011 Aug 21
 " $Id$
 
 syn keyword	csType			var Object String IntPtr
-syn keyword	csType			List IList IEnumerable
+syn keyword	csType			List IList IEnumerable Dictionary HashSet Stack
 syn keyword	csFunction		IsNullOrEmpty
-syn keyword	csUnspecifiedStatement	set get from join orderby select into
+syn keyword	csUnspecifiedStatement	set get from join where orderby select into default
+syn keyword	csStorage		event
 syn clear	csOperatorError
 syn region	csSquareBrackets	start='\[' end='\]' contains=csAttribute,csAttributeEx,csString,csConstant,csNumber
 syn keyword	csAttribute		contained DllImport Flags StructLayout MarshalAs
