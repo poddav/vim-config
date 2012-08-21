@@ -88,7 +88,17 @@ endif
 
     " C# XaML
     au  BufNewFile,BufRead *.xaml		setf xml
+
+    " Backup file
+"    au  BufRead *.*;*				call s:SetFTFromBackup(expand('<afile>'))
 augroup END "}}}
+
+fun! s:SetFTFromBackup(filename)
+    let match = matchlist(a:filename, '\.\(.\+\);\([0-9]\+\)$')
+    if !empty(match)
+	setf match[1]
+    endif
+endfun
 
 " FileType autocommands {{{
 
