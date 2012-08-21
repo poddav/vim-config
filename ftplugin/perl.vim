@@ -3,6 +3,7 @@
 
 setlocal cindent com=b:# indk-=0# cink-=0# fo=crq
 setlocal iskeyword=@,48-57,:,_,192-255
+setlocal expandtab
 
 let b:commentstart = '#'
 
