@@ -31,3 +31,4 @@ endfun
 
 unlet! b:context_help_fun
 let b:context_help_fun = function('HTMLLookupHelp')
+let b:unaryTagsStack = ''
