@@ -1,4 +1,4 @@
-for the most of these scripts, Vim 6.x required.
+for the most of these scripts, Vim 6.x or later required.
 
 syntax files that modify existing settings should go into:
 
