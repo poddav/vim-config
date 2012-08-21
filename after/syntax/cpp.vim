@@ -1,9 +1,9 @@
 " c++ syntax tweaks
-" Last change: 2011 Aug 13
+" Last change: 2012 Aug 04
 " $Id: cpp.vim,v 1.5 2006/10/30 15:59:30 rnd Exp $
 
 " STL types
-syn keyword	cType		vector string wstring deque pair
+syn keyword	cType		vector string wstring deque
 syn keyword	cType		stringstream istringstream ostringstream
 syn keyword	cType		wstringstream wistringstream wostringstream
 syn keyword	cType		wfstream wifstream wofstream
@@ -34,9 +34,14 @@ syn cluster	cParenGroup	add=cppIosConst,cppStdIdent
 syn clear	cppOperator
 "syn match	cppOperator	/\<operator\s*\%(<<\)\=/he=s+8
 syn match	cppOperator	/\<operator\%(\s*\W\|\s\+\i\)\@=/he=s+8
-syn keyword	cppOperator	typeid
+"syn keyword	cppOperator	typeid
 syn keyword	cppOperator	and bitor or xor compl bitand and_eq or_eq xor_eq not not_eq
 "syn region	cppOutput	matchgroup=cppShiftOp start=/<</ end=/<<\|[;{}]/me=s-1 contains=cParenGroup,cCppString,cCharacter,cSpecialCharacter,cppStdNamespace
+
+" C++11
+syn keyword	cppOperator	static_assert constexpr noexcept
+syn keyword	cType		thread_local
+syn keyword	cIdentifier	final override
 
 " C++/CLR extensions
 syn keyword	cIdentifier	ref property
