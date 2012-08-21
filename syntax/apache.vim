@@ -11,10 +11,10 @@
 " added mod_perl and mod_charset directives.
 "
 
-let apache_perl_conf = 1
+"let apache_perl_conf = 1
 
 syn case match
-syn clear apacheFixme
+"syn clear apacheFixme
 syn keyword apacheFixme FIXME TODO XXX NOT contained
 syn case ignore
 
