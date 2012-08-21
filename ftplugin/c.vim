@@ -7,6 +7,7 @@ setlocal formatoptions=crql cindent
 setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,:///,://
 setlocal foldmethod=marker
 setlocal suffixesadd=.h,.hpp
+setlocal expandtab
 
 " indenting options:
 " zero shift for func types, case labels and c++ class scope declarations,
@@ -32,6 +33,13 @@ endif
 
 ab <buffer> #i #include
 ab <buffer> #d #define
+
+" swap operands of operator==
+noremap <buffer> ,= :.s/\(.\{-}\)(\(.*\)\s\+==\s\+\(.*\))/\1(\3 == \2)/<CR>
+
+" move to first non-whitespace character
+noremap  <buffer> <silent> <HOME> :call MoveToFirstChar()<CR>
+inoremap <buffer> <silent> <HOME> <C-\><C-O>:call MoveToFirstChar()<CR>
 
 " mark GNU gettext translation
 noremap <buffer> ,t mtF"i_(<ESC>2f"a)<ESC>g`t
@@ -160,7 +168,7 @@ fun! CLookupHelp(word)
     endif
     if &ft == 'cpp' && exists('g:start_browser')
 	if filereadable(s:stl_help_path.'/'.word.'.html')
-	    return OpenURL(s:stl_help_path.'/'.word.'.html')
+	    return OpenURL('file:///'.s:stl_help_path.'/'.word.'.html')
 	endif
 
 	" check for boost:: keyword
