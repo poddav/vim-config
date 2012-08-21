@@ -1,6 +1,6 @@
 " Vim settings for Mingw MSYS environment.
 " Created: 2011 May 05
-" Last change: 2011 Aug 15
+" Last change: 2012 Jul 12
 " $Id$
 
 let MSYS_DIR='C:/usr/msys/1.0'
@@ -12,6 +12,5 @@ set shellslash
 let $PATH=$PATH.';D:/Program Files/Microsoft Visual Studio 10.0/VC/bin'
 
 language messages en
-language time C
 "language ctype Russian_Russia.1251
 let $LC_ALL="C"
