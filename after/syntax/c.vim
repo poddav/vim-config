@@ -1,25 +1,32 @@
 " Vim syntax file
-" Last change:	2011 Jul 21
+" Last change:	2012 Aug 04
 " $Id: c.vim,v 1.3 2006/10/28 10:19:22 rnd Exp $
 
 " this is missing from official c.vim
 syn keyword	cConstant LC_MESSAGES
 
 " standard functions
-syn keyword	cFunction	printf memcpy strcpy strcmp
+syn keyword	cFunction	printf memset memcpy strcpy strcmp assert
 
 " GCC extensions
 syn keyword	cDefine		__attribute__
 
+syn match	cFormat		display /%\d\+%/ contained
+
 " various ISO/POSIX types
 syn match	cType		/\<\l\i*_t\>/
 syn keyword	cConstant	O_RDONLY O_WRONLY O_TRUNC O_CREAT O_APPEND O_RDWR O_EXCL
+syn keyword	cConstant	FD_READ FD_WRITE FD_ACCEPT FD_CONNECT FD_CLOSE FD_READ_BIT FD_WRITE_BIT
+syn keyword	cConstant	AF_UNSPEC AF_INET AF_INET6 SOCK_STREAM SOCK_DGRAM SOCK_RAW
+syn keyword	cConstant	IPPROTO_TCP IPPROTO_ICMP IPPROTO_UDP IPPROTO_ICMPV6 AI_PASSIVE
+syn keyword	cConstant	EWOULDBLOCK
 
 syn match	cIdentifier	/\<\%(Enter\|Leave\|TryEnter\)CriticalSection\>/
 
 " win32 macros
 syn match	cIdentifier	/\<HKEY_\%(CLASSES_ROOT\|CURRENT_USER\|LOCAL_MACHINE\|USERS\)/
 syn keyword	cIdentifier	SUCCEEDED FAILED TRUE FALSE
+syn keyword	cIdentifier	SOCKET_ERROR INVALID_SOCKET WSA_INVALID_EVENT
 syn keyword	cDefine		WINAPI
 
 " win32 types
@@ -27,7 +34,7 @@ syn keyword	cType		CHAR UCHAR WCHAR TCHAR BSTR LPCSTR LPCWSTR LPCTSTR
 syn keyword	cType		SHORT USHORT LONG ULONG DWORD INT UINT BOOL LONGLONG ULONGLONG
 syn keyword	cType		MSG WPARAM LPARAM RECT FILETIME SYSTEMTIME DATE
 syn keyword	cType		HANDLE HINSTANCE HMODULE HWND HDC HGLRC HMENU HICON HCURSOR HBRUSH
-syn keyword	cType		HKEY HGLOBAL HLOCAL HRESULT
+syn keyword	cType		HKEY HGLOBAL HLOCAL HRESULT SOCKET WSAEVENT SOCKADDR_IN
 
 " win32 constants
 syn keyword	cConstant	WM_ACTIVATE WM_CLOSEWM_QUIT WM_ERASEBKGND WM_ACTIVATE
