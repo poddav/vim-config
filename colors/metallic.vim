@@ -1,4 +1,4 @@
-" Last Change:	Wed Dec 18 22:22:52 2002
+" Last Change:	2012 Aug 04
 " $Id: metallic.vim,v 1.1.1.1 2006/10/28 09:27:16 rnd Exp $
 
 " This color scheme uses a light grey background.
