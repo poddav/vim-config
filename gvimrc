@@ -3,6 +3,7 @@
 
 if has("x11")
     set guifont=Monospace\ 12
+    set linespace=3
 elseif has("win32")
 "    set guifont=Lucida\ Console:h12:cRUSSIAN
 "    set guifont=Andale\ Mono:h12:cRUSSIAN
@@ -13,6 +14,9 @@ endif
 " disable toolbar & menubar
 set guioptions-=T
 set vb t_vb=
+if has("x11")
+    set guiheadroom=0
+endif
 set lines=50 columns=110
 set mousemodel=popup_setpos
 
@@ -24,6 +28,7 @@ if s:hour > 7 && s:hour < 18
     highlight MatchParen	guibg=#b4b0a8
     highlight SpecialKey	guifg=#b4b0a8
     highlight NonText		guifg=#b4b0a8
+    highlight Statement		guifg=#a52a2a
 else
     colorscheme darkblue
     highlight Normal		guifg=#e0e0c0
