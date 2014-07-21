@@ -1,17 +1,34 @@
 " Vim syntax file
-" Last change:	2012 Aug 04
+" Last change:	2014 Jul 15
 " $Id: c.vim,v 1.3 2006/10/28 10:19:22 rnd Exp $
 
 " this is missing from official c.vim
-syn keyword	cConstant LC_MESSAGES
+syn keyword	cConstant	LC_MESSAGES
 
 " standard functions
-syn keyword	cFunction	printf memset memcpy strcpy strcmp assert
-
-" GCC extensions
-syn keyword	cDefine		__attribute__
+syn keyword	cFunction	memset memcpy memcmp strlen strcpy strcmp printf assert
 
 syn match	cFormat		display /%\d\+%/ contained
+
+" Compiler extensions
+syn keyword	cStatement	__attribute__ __volatile__ __declspec
+syn keyword	cStatement	__asm__
+
+syn clear	cParen
+syn region	cParen		transparent start='(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,cCppString,@Spell,cInlineAsm,cInlineGNUAsm,cGAsmString,@x86Asm,@GNUAsm
+syn clear	cDefine
+syn region	cDefine		start="^\s*\(%:\|#\)\s*\(define\|undef\)\>" skip="\\$" end="$" keepend contains=ALLBUT,@cPreProcGroup,@Spell,cInlineAsm,cInlineGNUAsm,@x86Asm,@GNUAsm
+
+syn include     @x86Asm		syntax/asmintel.vim
+syn case match
+syn keyword	cAsmStatement	__asm nextgroup=cInlineAsm skipwhite
+syn region	cInlineAsm	contained keepend start=/{/ end=/}/ contains=@x86Asm,cNumber,cComment,cCommentL containedin=cAsmStatement
+
+"syn include	@GNUAsm		syntax/asmgnu.vim
+"syn case match
+"syn keyword	cGAsmStatement	__asm__ nextgroup=cInlineGNUAsm skipwhite
+"syn region	cInlineGNUAsm	contained keepend start=/(/ end=/)/ contains=cGAsmString,cComment,cCommentL
+"syn region	cGAsmString	contained keepend start=/"/rs=e+1 end=/"/re=s-1 contains=@GNUAsm,cSpecial
 
 " various ISO/POSIX types
 syn match	cType		/\<\l\i*_t\>/
@@ -19,24 +36,27 @@ syn keyword	cConstant	O_RDONLY O_WRONLY O_TRUNC O_CREAT O_APPEND O_RDWR O_EXCL
 syn keyword	cConstant	FD_READ FD_WRITE FD_ACCEPT FD_CONNECT FD_CLOSE FD_READ_BIT FD_WRITE_BIT
 syn keyword	cConstant	AF_UNSPEC AF_INET AF_INET6 SOCK_STREAM SOCK_DGRAM SOCK_RAW
 syn keyword	cConstant	IPPROTO_TCP IPPROTO_ICMP IPPROTO_UDP IPPROTO_ICMPV6 AI_PASSIVE
-syn keyword	cConstant	EWOULDBLOCK
+syn keyword	cConstant	EWOULDBLOCK WSAEWOULDBLOCK
 
 syn match	cIdentifier	/\<\%(Enter\|Leave\|TryEnter\)CriticalSection\>/
 
 " win32 macros
 syn match	cIdentifier	/\<HKEY_\%(CLASSES_ROOT\|CURRENT_USER\|LOCAL_MACHINE\|USERS\)/
-syn keyword	cIdentifier	SUCCEEDED FAILED TRUE FALSE
+syn keyword	cIdentifier	SUCCEEDED FAILED TRUE FALSE INVALID_HANDLE_VALUE NO_ERROR
 syn keyword	cIdentifier	SOCKET_ERROR INVALID_SOCKET WSA_INVALID_EVENT
 syn keyword	cDefine		WINAPI
 
 " win32 types
-syn keyword	cType		CHAR UCHAR WCHAR TCHAR BSTR LPCSTR LPCWSTR LPCTSTR
+syn keyword	cType		CHAR UCHAR WCHAR TCHAR BSTR LPCSTR LPCWSTR LPCTSTR LPSTR LPWSTR LPTSTR
 syn keyword	cType		SHORT USHORT LONG ULONG DWORD INT UINT BOOL LONGLONG ULONGLONG
-syn keyword	cType		MSG WPARAM LPARAM RECT FILETIME SYSTEMTIME DATE
+syn keyword	cType		LARGE_INTEGER UINT_PTR LPVOID
+syn keyword	cType		MSG WPARAM LPARAM RECT LPRECT FILETIME SYSTEMTIME DATE
 syn keyword	cType		HANDLE HINSTANCE HMODULE HWND HDC HGLRC HMENU HICON HCURSOR HBRUSH
 syn keyword	cType		HKEY HGLOBAL HLOCAL HRESULT SOCKET WSAEVENT SOCKADDR_IN
 
 " win32 constants
+syn keyword	cConstant	MAX_PATH
+syn keyword	cConstant	IDOK IDCANCEL IDABORT IDRETRY IDIGNORE IDYES IDNO IDCLOSE IDHELP
 syn keyword	cConstant	WM_ACTIVATE WM_CLOSEWM_QUIT WM_ERASEBKGND WM_ACTIVATE
 	    \ WM_ACTIVATEAPP WM_AFXFIRST WM_AFXLAST WM_APP WM_ASKCBFORMATNAME
 	    \ WM_CANCELJOURNAL WM_CANCELMODE WM_CAPTURECHANGED WM_CHANGECBCHAIN
@@ -72,7 +92,10 @@ syn keyword	cConstant	WM_ACTIVATE WM_CLOSEWM_QUIT WM_ERASEBKGND WM_ACTIVATE
 	    \ WM_SYNCPAINT WM_SYSCHAR WM_SYSCOLORCHANGE WM_SYSCOMMAND WM_SYSDEADCHAR
 	    \ WM_SYSKEYDOWN WM_SYSKEYUP WM_TCARD WM_THEMECHANGED WM_TIMECHANGE WM_TIMER
 	    \ WM_UNDO WM_USER WM_USERCHANGED WM_VKEYTOITEM WM_VSCROLL WM_VSCROLLCLIPBOARD
-	    \ WM_WINDOWPOSCHANGED WM_WINDOWPOSCHANGING
+	    \ WM_WINDOWPOSCHANGED WM_WINDOWPOSCHANGING WM_COMMAND
 
 hi link cIdentifier	Identifier
 hi link cFunction	Function
+hi link cAsmStatement	cStatement
+hi link cGAsmStatement	cStatement
+hi link cAsmAttributes	cStatement
