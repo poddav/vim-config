@@ -43,7 +43,7 @@ function ReadSkel(name) "{{{2
 
     let ext = expand('<afile>:e')
     if ext == 'h' || ext == 'hh' || ext == 'hpp'
-	let headermacro = substitute(expand('<afile>:t'), '\.', '_', 'g') " . -> _
+	let headermacro = substitute(expand('<afile>:t'), '\.\|-', '_', 'g') " . -> _
 	let headermacro = substitute(headermacro, '.*', '\U\0', '') " upcase
 	exe '%s/\*+headmacro+\*/'.headermacro.'/ge'
     endif
