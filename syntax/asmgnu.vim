@@ -16,7 +16,7 @@ syn match	asmOperator	/\W$\W/hs=s+1,he=e-1
 syn match	masmDirective	/\s\.\(model\|startup\|code\|data\|stack\|[234]86\)\>/hs=s+1
 syn match	asmLabel	/\s@@[a-z0-9$_@?]\+/hs=s+1
 syn match	asmLabel	/[a-z_@][a-z0-9$_@?]*:/he=e-1
-syn match	asmRegister	/\<e\=\([abcd]x\|[ds]i\|[bs]p\)\>/
+syn match	asmRegister	/%\<e\=\([abcd]x\|[ds]i\|[bs]p\)\>/
 syn match	asmRegister	/\<[abcd][hl]\>/
 syn match	asmSegRegister	/\<[cdefgs]s\>/
 syn match	asmDecNumber	/\<\d\+\>/
@@ -25,8 +25,8 @@ syn region	asmString	start=+'+ end=+'+
 syn keyword	asmTodo		contained TODO FIXME
 syn match	asmComment	/;.*/ contains=asmTodo
 
-if !exists("did_asmintel_syntax_inits")
-  let did_asm_syntax_inits = 1
+if !exists("did_asm_gnu_syntax_inits")
+  let did_asm_gnu_syntax_inits = 1
 
   " The default methods for highlighting.  Can be overridden later
   hi link asmDecNumber	Number
@@ -44,4 +44,4 @@ if !exists("did_asmintel_syntax_inits")
   hi link asmSegRegister	Identifier
 endif
 
-let b:current_syntax = "asmintel"
+let b:current_syntax = "asmgnu"

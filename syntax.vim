@@ -12,6 +12,7 @@ if !has('gui')
 endif
 
 let bash_is_sh=1
+let is_bash=1
 let c_syntax_for_h = 1
 let perl_include_pod = 1
 let perl_want_scope_in_variables = 1
@@ -19,7 +20,7 @@ let perl_want_scope_in_variables = 1
 let perl_highlight_matches = 1
 let perl_fold = 1
 let php_minlines = 300	" syntax sync threshold
-let asm_gnu_as_syntax = 1
+"let asm_gnu_as_syntax = 1
 
 " disable syntax errors within C++ lambdas definitions
 let c_no_curly_error=1

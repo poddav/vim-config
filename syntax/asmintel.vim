@@ -8,12 +8,12 @@ syn clear
 syn case ignore
 
 syn keyword	asmType		byte word dword near far short para
-syn keyword	asmDirective	org assume extrn public end include if endif
-syn keyword	asmDirective	db dw dd ends
+syn keyword	asmDirective	org assume extrn public end include includelib if endif
+syn keyword	asmDirective	db dw dd ends endm
 syn region	asmDeclaration	matchgroup=asmIdentifier start=/\<\w\+/ matchgroup=asmDirective end=/\<\(segment\|ends\|group\|struc\|union\|proc\|endp\|macro\|endm\|label\|equ\|db\|dw\|dd\)\>/ oneline
 syn keyword	asmOperator	offset seg ptr dup
-syn match	asmOperator	/\W$\W/hs=s+1,he=e-1
-syn match	masmDirective	/\s\.\(model\|startup\|code\|data\|stack\|[234]86\)\>/hs=s+1
+syn match	asmOperator	/\W\$\W/hs=s+1,he=e-1
+syn match	masmDirective	/\s\.\(model\|startup\|code\|data\|const\|stack\|[2346]86\)\>/hs=s+1
 syn match	asmLabel	/\s@@[a-z0-9$_@?]\+/hs=s+1
 syn match	asmLabel	/[a-z_@][a-z0-9$_@?]*:/he=e-1
 syn match	asmRegister	/\<e\=\([abcd]x\|[ds]i\|[bs]p\)\>/
