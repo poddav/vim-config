@@ -1,0 +1,3 @@
+vimrc	text eol=lf 
+gvimrc	text eol=lf 
+*.vim	text eol=lf 
