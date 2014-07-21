@@ -1,6 +1,7 @@
 CVS
+ChangeLog
 
-" vim internals
+# vim internals
 .netrwhist
 .VimballRecord
 doc/*
@@ -8,6 +9,11 @@ autoload/*
 
 # private settings
 userinfo.vim
+
+# test files
+test-info.vim
+rgb.vim
+syntax/xcolor.vim
 
 # backups
 *~
