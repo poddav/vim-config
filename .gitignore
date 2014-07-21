@@ -3,6 +3,8 @@ CVS
 " vim internals
 .netrwhist
 .VimballRecord
+doc/*
+autoload/*
 
 # private settings
 userinfo.vim
