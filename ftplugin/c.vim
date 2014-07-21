@@ -1,7 +1,8 @@
 " C source-specific settigns
 " $Id: c.vim,v 1.14 2006/11/01 08:09:11 rnd Exp $
 
-let $VSDIR = 'D:/Program Files/Microsoft Visual Studio 10.0/VC'
+let $VSDIR = 'D:/Program\\ Files/Microsoft\\ Visual\\ Studio\\ 12.0/VC'
+let WINSDKDIR = 'D:/Program\\ Files/Microsoft\\ SDKs/Windows/v7.1/Include'
 
 setlocal formatoptions=crql cindent
 setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,:///,://
@@ -16,13 +17,13 @@ setlocal cinoptions=t0,:0,g0,(0,u0,W4,j1
 
 setlocal iskeyword=@,48-57,_,192-255
 if has('gui')
-    setlocal textwidth=85
+    setlocal textwidth=90
 endif
 
 if &ft == 'cpp'
     let b:commentstart = "//"
     let b:commentend = ""
-    let &l:path = '.,'.$VSDIR.'/include,,'
+    let &l:path = '.,'.$VSDIR.'/include,'.WINSDKDIR.',,'
     setlocal matchpairs+=<:>
 else
     let b:commentstart = "/*"
