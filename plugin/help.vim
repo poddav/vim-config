@@ -4,7 +4,7 @@
 if exists('MSYS_DIR') || exists('$CYGWIN') || has('unix')
     let s:man_post_proc='|col -b|uniq'
 else
-    let s:man_post_proc=''
+    let s:man_post_proc='|col -b|uniq'
 endif
 
 let s:sh_builtin='^\%(alias\|bg\|bind\|break\|builtin\|case\|cd\|co\%(mmand\|ntinue\)\|declare\|dirs\|echo\|enable\|eval\|ex\%(ec\|it\|port\)\|fc\|fg\|for\|function\|getopts\|hash\|help\|history\|if\|jobs\|kill\|let\|lo\%(cal\|gout\)\|popd\|pushd\|pwd\|read\%(\|only\)\|return\|se\%(lect\|t\)\|shift\|source\|suspend\|test\|times\|trap\|ty\%(pe\|peset\)\|ulimit\|umask\|un\%(alias\|set\|til\)\|variables\|wait\|while\)$'
@@ -18,7 +18,7 @@ fun! OpenHelpWin(cmd, ft, ...)
 	setlocal modifiable buftype=nofile noswapfile
     endif
     let &ft = a:ft
-    exe "0r!".a:cmd
+    exe "silent 0r!".a:cmd
     set nomod
     let helpsize = line('$')
     if helpsize > &helpheight
@@ -109,12 +109,17 @@ fun! Perldoc(word)
     else
 	let cmd = 'perldoc '.a:word
     endif
-    call OpenHelpWin(cmd.' 2>/dev/null '.s:man_post_proc, filetype, 'Perldoc '.a:word)
+"    call OpenHelpWin(cmd.' 2>/dev/null '.s:man_post_proc, filetype, 'Perldoc '.a:word)
+    call OpenHelpWin(cmd, filetype, 'Perldoc '.a:word)
+    if v:shell_error || getline(1) =~ '^No documentation'
+	bdel
+	return 0
+    endif
     if move_to_pattern != ''
 	silent exec move_to_pattern
 	normal z
     endif
-    return !v:shell_error
+    return 1
 endfun
 
 fun! ShBuiltin(word)
@@ -133,7 +138,7 @@ fun! ShBuiltin(word)
 endfun
 
 fun! WinHelp(word, path)
-    exe '!start winhlp32 -k' a:word a:path
+    exe 'silent !start winhlp32 -k' a:word a:path
     return 1
 "    return LookupInternet(a:word, 1)
 endfun
@@ -144,7 +149,9 @@ fun! Help(word)
     endif
 
     if &ft =~ 'perl'
-	call Perldoc(a:word)
+	if Perldoc(a:word) == 0
+	    redraw | echohl Error | echo 'No documentation on "'.a:word.'"' | echohl None
+	endif
 
     elseif &ft =~ '^z\=sh'
 	call ShBuiltin(a:word)
