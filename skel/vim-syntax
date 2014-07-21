@@ -4,7 +4,6 @@
 " Created:	*+shortdate+*
 " Last Change:	*+date+*
 " Filenames:	
-" $Id$
 
 syn clear
 syn case match
