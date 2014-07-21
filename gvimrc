@@ -8,21 +8,23 @@ elseif has("win32")
 "    set guifont=Lucida\ Console:h12:cRUSSIAN
 "    set guifont=Andale\ Mono:h12:cRUSSIAN
     set guifont=Consolas:h12:cRUSSIAN
+"    set guifontwide=MingLiU:h12 " chinese
+    set guifontwide=MS\ Gothic:h12 " japanese
     set linespace=3
 endif
 
 " disable toolbar & menubar
-set guioptions-=T
+set guioptions-=T guioptions-=m
 set vb t_vb=
 if has("x11")
     set guiheadroom=0
 endif
-set lines=50 columns=110
+set lines=50 columns=120
 set mousemodel=popup_setpos
 
 "silent! colorscheme rnd-gui
 let s:hour = strftime('%H')
-if s:hour > 7 && s:hour < 18
+if 0 " s:hour > 7 && s:hour < 18
     colorscheme metallic
     highlight Function		guifg=#006080 gui=bold
     highlight MatchParen	guibg=#b4b0a8
