@@ -1,12 +1,12 @@
 " c++ syntax tweaks
-" Last change: 2012 Aug 04
+" Last change: 2014 Jun 29
 " $Id: cpp.vim,v 1.5 2006/10/30 15:59:30 rnd Exp $
 
 " STL types
 syn keyword	cType		vector string wstring deque
 syn keyword	cType		stringstream istringstream ostringstream
 syn keyword	cType		wstringstream wistringstream wostringstream
-syn keyword	cType		wfstream wifstream wofstream
+syn keyword	cType		wfstream wifstream wofstream wistream wostream
 syn keyword	cType		unique_ptr shared_ptr
 syn keyword	cType		streamoff streamsize
 syn match	cType		/::\(const_\)\=iterator\>/hs=s+2
@@ -34,7 +34,7 @@ syn cluster	cParenGroup	add=cppIosConst,cppStdIdent
 syn clear	cppOperator
 "syn match	cppOperator	/\<operator\s*\%(<<\)\=/he=s+8
 syn match	cppOperator	/\<operator\%(\s*\W\|\s\+\i\)\@=/he=s+8
-"syn keyword	cppOperator	typeid
+syn keyword	cppOperator	typeid
 syn keyword	cppOperator	and bitor or xor compl bitand and_eq or_eq xor_eq not not_eq
 "syn region	cppOutput	matchgroup=cppShiftOp start=/<</ end=/<<\|[;{}]/me=s-1 contains=cParenGroup,cCppString,cCharacter,cSpecialCharacter,cppStdNamespace
 
