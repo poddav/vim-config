@@ -4,14 +4,13 @@
 setlocal cindent com=b:# indk-=0# cink-=0# fo=crq
 setlocal iskeyword=@,48-57,:,_,192-255
 setlocal expandtab
+setlocal foldlevelstart=99
+if exists('perl_fold')
+    unlet perl_fold
+endif
 
 let b:commentstart = '#'
-
-if expand('%:e') == 'pm'
-    let &l:makeprg='perl -cwT '.expand('%:t')
-else
-    let &l:makeprg='perl -cwTx '.expand('%:t')
-endif
+let &l:makeprg='perl -cwT '.expand('%:t')
 
 hi link podCommand	preProc
 
@@ -31,3 +30,7 @@ map <silent> <buffer> ,- :call <SID>InsertSeparator()<CR>
 " jump between subs
 map <buffer> [[ ?{<CR>w99[{
 map <buffer> <silent> ]] j0[[%:silent!/{<CR>
+
+" move to first non-whitespace character
+noremap  <buffer> <silent> <HOME> :call MoveToFirstChar()<CR>
+inoremap <buffer> <silent> <HOME> <C-\><C-O>:call MoveToFirstChar()<CR>
