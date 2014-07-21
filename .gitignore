@@ -1,4 +1,11 @@
 CVS
+
+" vim internals
 .netrwhist
 .VimballRecord
+
+# private settings
+userinfo.vim
+
+# backups
 *~
