@@ -7,6 +7,9 @@ if version < 600
 else
   augroup filetypedetect
 endif
+    au  BufNewFile,BufRead *.mlt		setf mlt
+    au  BufNewFile,BufRead *.tjs		setf javascript
+    au  BufNewFile,BufRead *.ks			setf kirikiri
     au  BufNewFile,BufRead *.spec		setf spec
     au  BufNewFile,BufRead ~/perl/*		setf perl
     au  BufNewFile,BufRead *.txt		setf text
@@ -20,6 +23,7 @@ endif
     au  BufNewFile,BufRead *.qc,*.pqc		setf quakec
     au! BufNewFile,BufRead *.asm
     au  BufNewFile,BufRead *.asm		setf asmintel
+    au  BufNewFile,BufRead *.nas		setf nasm
     au  BufNewFile,BufRead named.conf		setf named
     au  BufNewFile,BufRead /var/named/*,/etc/namedb/*	setf bindzone
     au  BufNewFile,BufRead /etc/sendmail.cf,*/sendmail-cf/*.cf
@@ -118,7 +122,7 @@ au FileType apache	let b:commentstart="#" | let b:closetag_html_style=1
 au FileType asm		let b:commentstart='#' | setlocal autoindent sw=8 sts=0
 au FileType asmintel	if exists('asm_gnu_as_syntax') | let b:commentstart='#' |
 			\ else | let b:commentstart=';' | endif | setlocal autoindent sw=8 sts=0
-au FileType text	setlocal textwidth=78 formatoptions=tcnrq | call TextMode()
+au FileType text	setlocal textwidth=0 formatoptions=tcnrq | call TextMode()
 " FIXME :t only for au BufEnter * cd <dir-withfile> (see below)
 au FileType terminfo	let b:makeprg="tic " . expand("<afile>:t")
 au FileType m4sm	let b:makeprg="make " . expand("<afile>:t:r") . ".cf" |
